@@ -1,0 +1,27 @@
+/**
+ * Breadcrumb della barra superiore: sobria, senza sfondo (stile shadcn).
+ */
+.header-breadcrumb {
+    margin-bottom: 0;
+    font-size: 13px;
+    color: var(--muted-foreground);
+}
+
+.header-breadcrumb li {
+    font-size: 13px;
+}
+
+.header-breadcrumb li a {
+    text-decoration: none;
+    color: var(--muted-foreground);
+}
+
+.header-breadcrumb li a:hover {
+    color: var(--foreground);
+}
+
+@media only screen and (max-width: 992px) {
+    .header-breadcrumb {
+        display: none;
+    }
+}

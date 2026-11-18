@@ -1,0 +1,10 @@
+.small-description-text {
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+    margin-bottom: 0.5rem;
+}
+
+.medium-select-description-text {
+    font-size: 0.8rem;
+    color: #db9a00;
+}

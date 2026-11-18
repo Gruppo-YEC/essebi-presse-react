@@ -1,0 +1,284 @@
+/**
+ * Sidebar in stile shadcn: sfondo tenue, bordo a destra, voci arrotondate.
+ * I colori vengono dai token --sidebar-* definiti in tailwind.css:
+ * per personalizzarla in un progetto basta ridefinire quei token.
+ */
+
+#sidebar {
+    background: var(--sidebar);
+    color: var(--sidebar-foreground);
+    border-right: 1px solid var(--sidebar-border);
+    max-width: 264px;
+    min-width: 264px;
+    transition: margin-left .35s ease-in-out,left .35s ease-in-out,margin-right .35s ease-in-out,right .35s ease-in-out;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    bottom: 0;
+    z-index: 1021;
+}
+
+#sidebar::-webkit-scrollbar{
+    display: none;
+}
+
+#sidebar[data-sidebar=false] {
+    margin-left: -264px;
+}
+
+@media only screen and (min-width: 992px) {
+    #column-container.sidebar-open {
+        margin-left: 264px;
+    }
+}
+
+/* Header della sidebar in stile shadcn: tile quadrato col logo + nome app */
+.sidebar-logo {
+    width: 100%;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar-logo-tile {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md, 8px);
+    background: var(--sidebar-primary);
+    color: var(--sidebar-primary-foreground);
+    overflow: hidden;
+}
+
+.sidebar-logo-tile img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.sidebar-logo-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--sidebar-foreground);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Ricerca voci di menu, tra il logo e il menu */
+.sidebar-search {
+    width: 100%;
+    padding: 0 12px 8px 12px;
+}
+
+.sidebar-search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    /* l'icona sta DENTRO l'input (bg-card): segue la palette dell'input come
+       il placeholder, non --sidebar-foreground che nei progetti brandizzati
+       è bianco e sparirebbe sul fondo chiaro */
+    color: var(--muted-foreground);
+    pointer-events: none;
+}
+
+.sidebar-menu {
+    width: 100%;
+    padding: 8px 0;
+    margin-top: 0;
+    flex: 1 1 auto;
+    overflow-y: auto;
+}
+
+.sidebar-menu::-webkit-scrollbar {
+    display: none;
+}
+
+a.sidebar-item {
+    color: var(--sidebar-foreground);
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+    padding: 8px 10px;
+    transition: background-color .15s ease-in-out, color .15s ease-in-out;
+    margin-left: 8px;
+    margin-right: 8px;
+    border-radius: var(--radius-md, 8px);
+    margin-bottom: 2px;
+}
+
+a.sidebar-item:hover {
+    background-color: var(--sidebar-accent);
+    color: var(--sidebar-accent-foreground);
+}
+
+a.sidebar-item svg {
+    width: 16px;
+    transition: color .15s ease-in-out;
+    color: var(--sidebar-foreground);
+    opacity: 0.75;
+}
+
+.sidebar-folder svg {
+    width: 16px;
+}
+
+a.sidebar-item.active {
+    background: var(--sidebar-accent);
+    color: var(--sidebar-accent-foreground);
+    font-weight: 500;
+}
+
+a.sidebar-item.active svg {
+    color: var(--sidebar-accent-foreground);
+    opacity: 1;
+}
+
+.sidebar-header {
+    color: var(--sidebar-foreground);
+    opacity: 0.6;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 12px 18px 4px 18px;
+    display: block;
+    margin-top: 12px;
+}
+
+.sidebar-folder {
+    color: var(--sidebar-foreground);
+    display: block;
+    padding: 0;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 2px;
+}
+
+.sidebar-foldername {
+    color: var(--sidebar-foreground);
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+    padding: 8px 10px;
+    transition: background-color .15s ease-in-out;
+    cursor: pointer;
+    border-radius: var(--radius-md, 8px);
+    margin-bottom: 2px;
+}
+
+.sidebar-foldername:hover {
+    background-color: var(--sidebar-accent);
+    color: var(--sidebar-accent-foreground);
+}
+
+.sidebar-foldername span.chevron {
+    float: right;
+    opacity: 0.6;
+}
+
+.sidebar-subitems {
+    display: none;
+    margin-left: 18px;
+    padding-left: 10px;
+    border-left: 1px solid var(--sidebar-border);
+}
+
+.sidebar-subitem {
+    padding: 6px 10px;
+    color: var(--sidebar-foreground);
+    text-decoration: none;
+    font-size: 13px;
+    display: block;
+    border-radius: var(--radius-md, 8px);
+    margin-bottom: 2px;
+    transition: background-color .15s ease-in-out;
+}
+
+.sidebar-subitem:hover {
+    background-color: var(--sidebar-accent);
+    color: var(--sidebar-accent-foreground);
+}
+
+a.sidebar-subitem.active {
+    background-color: var(--sidebar-accent);
+    color: var(--sidebar-accent-foreground);
+    font-weight: 500;
+}
+
+.sidebar-folder.active .sidebar-subitems {
+    display: block;
+}
+
+/**
+ * Footer sidebar: utente in fondo, al click il menu con impostazioni,
+ * tema chiaro/scuro e logout (stile shadcn sidebar).
+ */
+.sidebar-footer {
+    width: 100%;
+    border-top: 1px solid var(--sidebar-border);
+    padding: 8px;
+}
+
+.sidebar-user {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;
+    border-radius: var(--radius-md, 8px);
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: var(--sidebar-foreground);
+    text-align: left;
+    transition: background-color .15s ease-in-out;
+}
+
+.sidebar-user:hover,
+.sidebar-user[data-state="open"] {
+    background-color: var(--sidebar-accent);
+    color: var(--sidebar-accent-foreground);
+}
+
+.sidebar-user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 9999px;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+.sidebar-user-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.sidebar-user-name {
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidebar-user-email {
+    font-size: 11px;
+    opacity: 0.65;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidebar-user-chevron {
+    opacity: 0.5;
+    flex-shrink: 0;
+}

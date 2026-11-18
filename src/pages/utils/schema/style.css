@@ -1,0 +1,56 @@
+.schema-page .schema-section-title {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--muted-foreground);
+    margin-bottom: 4px;
+}
+
+.schema-page .schema-link-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 0;
+    font-size: 0.875rem;
+    min-width: 0;
+}
+
+.schema-page .schema-arrow {
+    color: var(--muted-foreground);
+    flex-shrink: 0;
+}
+
+.schema-page .schema-field {
+    font-size: 0.75rem;
+    background-color: var(--muted);
+    border-radius: 4px;
+    padding: 1px 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.schema-page .schema-type-badge {
+    font-size: 9px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+
+.schema-page .schema-entity-link {
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.schema-page .schema-entity-link:hover {
+    text-decoration: underline;
+}
+
+/* card evidenziata dopo il click su un collegamento */
+.schema-page .schema-card-highlight {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+    transition: outline-color 0.3s ease;
+}

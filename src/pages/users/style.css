@@ -1,0 +1,35 @@
+.users-page__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.users-page__avatar-placeholder {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted-foreground);
+}
+
+.users-page__avatar-option {
+    cursor: pointer;
+    padding: 4px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.users-page__avatar-option:hover {
+    border-color: var(--border);
+    background-color: var(--accent);
+}
+
+.users-page__avatar-option.selected {
+    border-color: var(--primary);
+    background-color: color-mix(in srgb, var(--primary) 10%, transparent);
+}

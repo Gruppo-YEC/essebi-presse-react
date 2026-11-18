@@ -1,0 +1,15 @@
+/**
+ * Barra superiore minimale (stile shadcn): trigger sidebar + breadcrumb.
+ */
+#header-navbar {
+    border-bottom: 1px solid var(--border);
+    height: 48px;
+}
+
+#header-menu {
+    font-size: 13px;
+}
+
+#header-menu[data-sidebar=true] {
+    margin-left: 264px;
+}

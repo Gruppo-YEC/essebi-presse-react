@@ -1,0 +1,72 @@
+/* Tabella di anteprima dell'import, confinata al body del modale. */
+
+#modal-entity-import-body .import-table-container {
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    overflow: auto;
+}
+
+#modal-entity-import-body .import-table {
+    margin-bottom: 0;
+    min-width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.75rem;
+    white-space: nowrap;
+}
+
+#modal-entity-import-body .import-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--muted);
+}
+
+#modal-entity-import-body .import-table thead th {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: var(--muted-foreground);
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+#modal-entity-import-body .import-table tbody td {
+    padding: 0.375rem 0.5rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+}
+
+#modal-entity-import-body .import-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+#modal-entity-import-body .import-table tbody tr:hover td {
+    background: var(--accent);
+}
+
+/* Colonna numero riga e colonna stato */
+#modal-entity-import-body .import-table tbody td:first-child {
+    text-align: center;
+    color: var(--muted-foreground);
+    font-variant-numeric: tabular-nums;
+}
+
+#modal-entity-import-body .import-table tbody td:nth-child(2) {
+    text-align: center;
+}
+
+/* Righe con errori: bordo sinistro e fondo rosso tenue */
+#modal-entity-import-body .import-table tbody tr.is-error td {
+    background: color-mix(in srgb, var(--danger) 8%, transparent);
+}
+
+#modal-entity-import-body .import-table tbody tr.is-error td:first-child {
+    box-shadow: inset 3px 0 0 var(--danger);
+}
+
+#modal-entity-import-body .field-icon {
+    color: var(--muted-foreground);
+    font-size: 0.7rem;
+}

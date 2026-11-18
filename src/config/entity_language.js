@@ -1,0 +1,70 @@
+export const entity_language = {
+    entity: {
+        user: 'Utenti',
+        user_group: 'Gruppi',
+        log: 'Log di sistema',
+        user_entity_saved_filters: 'Filtri salvati',
+        user_entity_preferences: 'Preferenze entità',
+    },
+    labels: {
+        "user": {
+            "id": 'id',
+            "date": 'Data',
+            "lastUpdate": 'Ultimo aggiornamento',
+            "deleted": 'Eliminato',
+            "idUserGroup": 'Gruppo',
+            "name": 'Nome',
+            "surname": 'Cognome',
+            "username": 'Username',
+            "email": 'Email',
+            "level": 'Livello utente',
+            "avatar": 'Avatar',
+            "password": 'Password'
+        },
+        "user_group": {
+            "id": 'id',
+            "date": 'Data',
+            "lastUpdate": 'Ultimo aggiornamento',
+            "deleted": 'Eliminato',
+            "name": 'Nome gruppo',
+        },
+        "log": {
+            "id": 'id',
+            "date": 'Data',
+            "lastUpdate": 'Ultimo aggiornamento',
+            "deleted": 'Eliminato',
+            "idItem": 'Id elemento',
+            "idUser": 'Utente',
+            "entity": 'Entità',
+            "operation": 'Operazione',
+            "operation.options.0_DELETE": 'Elimina',
+            "operation.options.1_EDIT": 'Modifica',
+            "operation.options.2_ADD": 'Aggiungi',
+            "operation.options.3_LOGIN": 'Login',
+            "operation.options.4_LOGOUT": 'Logout',
+            "notes": 'Note',
+        },
+        "user_entity_saved_filters": {
+            "id": 'id',
+            "date": 'Data',
+            "lastUpdate": 'Ultimo aggiornamento',
+            "deleted": 'Eliminato',
+            "author": 'Utente',
+            "entity": 'Entità',
+            "name": 'Nome',
+            "notes": 'Note',
+            "content": 'Json filtri'
+        },
+        "user_entity_preferences": {
+            "id": 'id',
+            "date": 'Data',
+            "lastUpdate": 'Ultimo aggiornamento',
+            "deleted": 'Eliminato',
+            "author": 'Utente',
+            "entity": 'Entità',
+            "content": 'Json preferenze',
+            "label": 'Etichetta',
+            "isDefault": 'Attiva'
+        },
+    }
+};

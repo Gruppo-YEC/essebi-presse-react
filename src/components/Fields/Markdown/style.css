@@ -1,0 +1,235 @@
+/* Campo Markdown.
+   Tutto sotto .ckd-markdown per non interferire con gli stili di sistema. */
+
+.ckd-markdown {
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    overflow: hidden;
+    background: #fff;
+}
+
+/* ------------------------------------------------------------- barra */
+
+.ckd-markdown__barra {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    padding: 0.35rem 0.5rem;
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.ckd-markdown__viste {
+    display: flex;
+    align-items: center;
+    gap: 0.15rem;
+}
+
+.ckd-markdown__barra button {
+    border: 1px solid transparent;
+    background: transparent;
+    border-radius: 0.25rem;
+    width: 2rem;
+    height: 2rem;
+    color: #495057;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color .12s, border-color .12s;
+}
+
+.ckd-markdown__barra button:hover:not(:disabled) {
+    background: #e9ecef;
+    border-color: #dee2e6;
+}
+
+.ckd-markdown__barra button:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.ckd-markdown__barra button.attivo {
+    background: #0d6efd;
+    border-color: #0d6efd;
+    color: #fff;
+}
+
+/* ------------------------------------------------------------- corpo */
+
+.ckd-markdown__corpo {
+    display: block;
+}
+
+/* Vista affiancata: due colonne che diventano una su schermi stretti */
+.ckd-markdown__corpo--affiancati {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.ckd-markdown__corpo--affiancati .ckd-markdown__area {
+    border-right: 1px solid #dee2e6;
+}
+
+@media (max-width: 768px) {
+    .ckd-markdown__corpo--affiancati {
+        grid-template-columns: 1fr;
+    }
+    .ckd-markdown__corpo--affiancati .ckd-markdown__area {
+        border-right: none;
+        border-bottom: 1px solid #dee2e6;
+    }
+}
+
+.ckd-markdown__area {
+    display: block;
+    width: 100%;
+    border: 0;
+    padding: 0.75rem 0.9rem;
+    /* monospazio: nel Markdown l'allineamento e i rientri hanno significato */
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.82rem;
+    line-height: 1.65;
+    resize: vertical;
+    tab-size: 2;
+    outline: none;
+    background: #fff;
+    color: #212529;
+}
+
+.ckd-markdown__area::placeholder {
+    color: #adb5bd;
+}
+
+.ckd-markdown__area:focus {
+    background: #fffef8;
+}
+
+/* --------------------------------------------------------- anteprima */
+
+.ckd-markdown__anteprima {
+    padding: 0.75rem 0.9rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    overflow-x: auto;
+    max-height: 40rem;
+    overflow-y: auto;
+}
+
+/* Titoli contenuti: qui servono a orientarsi, non a fare da intestazione pagina */
+.ckd-markdown__anteprima h1,
+.ckd-markdown__anteprima h2,
+.ckd-markdown__anteprima h3,
+.ckd-markdown__anteprima h4,
+.ckd-markdown__anteprima h5,
+.ckd-markdown__anteprima h6 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 1rem 0 0.35rem;
+    color: #0d6efd;
+}
+
+.ckd-markdown__anteprima h1:first-child,
+.ckd-markdown__anteprima h2:first-child,
+.ckd-markdown__anteprima h3:first-child {
+    margin-top: 0;
+}
+
+.ckd-markdown__anteprima p {
+    margin: 0 0 0.6rem;
+}
+
+.ckd-markdown__anteprima ul,
+.ckd-markdown__anteprima ol {
+    margin: 0 0 0.6rem;
+    padding-left: 1.3rem;
+}
+
+.ckd-markdown__anteprima li {
+    margin: 0.15rem 0;
+}
+
+/* voci annidate e continuazioni di riga, prodotte dal renderer */
+.ckd-markdown__anteprima li.md-nested {
+    margin-left: 1.1rem;
+    list-style-type: circle;
+}
+
+.ckd-markdown__anteprima li.md-continua {
+    list-style: none;
+    margin-left: -0.2rem;
+}
+
+.ckd-markdown__anteprima code {
+    background: #f1f3f5;
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+    font-size: 0.85em;
+    color: #c7254e;
+}
+
+.ckd-markdown__anteprima pre {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 0.25rem;
+    padding: 0.6rem 0.8rem;
+    overflow-x: auto;
+    margin: 0 0 0.6rem;
+}
+
+.ckd-markdown__anteprima pre code {
+    background: transparent;
+    padding: 0;
+    color: #212529;
+}
+
+.ckd-markdown__anteprima blockquote {
+    margin: 0 0 0.6rem;
+    padding: 0.2rem 0 0.2rem 0.8rem;
+    border-left: 3px solid #dee2e6;
+    color: #6c757d;
+}
+
+.ckd-markdown__anteprima hr {
+    margin: 0.9rem 0;
+    border: 0;
+    border-top: 1px solid #dee2e6;
+}
+
+.ckd-markdown__anteprima a {
+    color: #0d6efd;
+    word-break: break-word;
+}
+
+/* -------------------------------------------------------------- piede */
+
+.ckd-markdown__piede {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    padding: 0.3rem 0.6rem;
+    background: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    font-size: 0.7rem;
+    color: #6c757d;
+}
+
+.ckd-markdown__aiuto {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.ckd-markdown__aiuto code {
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 3px;
+    padding: 0 0.25rem;
+    color: #6c757d;
+    font-size: 0.95em;
+}

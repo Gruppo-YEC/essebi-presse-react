@@ -1,0 +1,241 @@
+.cropper-container {
+    position: relative;
+    overflow: hidden;
+    background-color: #f7f7f7;
+    user-select: none;
+}
+
+/**
+ * Il reset di Tailwind imposta img { max-width: 100%; height: auto }:
+ * qui le immagini hanno dimensioni calcolate via inline style e il clone
+ * dentro il crop box verrebbe clampato alla larghezza del box,
+ * disallineandosi dall'immagine sottostante. Va neutralizzato.
+ */
+.cropper-container img {
+    display: block;
+    max-width: none !important;
+    max-height: none !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+}
+
+.cropper-wrap-box,
+.cropper-canvas {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.cropper-canvas {
+    overflow: hidden;
+}
+
+.cropper-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.cropper-crop-box {
+    position: absolute;
+    cursor: move;
+}
+
+.cropper-view-box {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    outline: 1px solid rgba(51, 153, 255, 0.75);
+}
+
+.cropper-dashed {
+    position: absolute;
+    display: block;
+    border: 0 dashed #eee;
+    opacity: 0.5;
+}
+
+.cropper-dashed-h {
+    top: 33.33333%;
+    left: 0;
+    width: 100%;
+    height: 33.33333%;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+}
+
+.cropper-dashed-v {
+    top: 0;
+    left: 33.33333%;
+    width: 33.33333%;
+    height: 100%;
+    border-right-width: 1px;
+    border-left-width: 1px;
+}
+
+.cropper-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: 0;
+    height: 0;
+    opacity: 0.75;
+}
+
+.cropper-center::before,
+.cropper-center::after {
+    position: absolute;
+    display: block;
+    content: ' ';
+    background-color: #eee;
+}
+
+.cropper-center::before {
+    top: 0;
+    left: -3px;
+    width: 7px;
+    height: 1px;
+}
+
+.cropper-center::after {
+    top: -3px;
+    left: 0;
+    width: 1px;
+    height: 7px;
+}
+
+.cropper-line {
+    position: absolute;
+    display: block;
+    background-color: transparent;
+    z-index: 5;
+}
+
+.cropper-line.line-n {
+    top: -5px;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    cursor: ns-resize;
+}
+
+.cropper-line.line-e {
+    top: 0;
+    right: -5px;
+    width: 10px;
+    height: 100%;
+    cursor: ew-resize;
+}
+
+.cropper-line.line-s {
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    cursor: ns-resize;
+}
+
+.cropper-line.line-w {
+    top: 0;
+    left: -5px;
+    width: 10px;
+    height: 100%;
+    cursor: ew-resize;
+}
+
+.cropper-point {
+    position: absolute;
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color: #39f;
+    opacity: 1;
+    border: 2px solid white;
+    box-shadow: 0 0 2px rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+.cropper-point.point-nw {
+    top: -5px;
+    left: -5px;
+    cursor: nw-resize;
+}
+
+.cropper-point.point-ne {
+    top: -5px;
+    right: -5px;
+    cursor: ne-resize;
+}
+
+.cropper-point.point-sw {
+    bottom: -5px;
+    left: -5px;
+    cursor: sw-resize;
+}
+
+.cropper-point.point-se {
+    right: -5px;
+    bottom: -5px;
+    cursor: se-resize;
+}
+
+@media (min-width: 768px) {
+    .cropper-point {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .cropper-point.point-nw {
+        top: -6px;
+        left: -6px;
+    }
+    
+    .cropper-point.point-ne {
+        top: -6px;
+        right: -6px;
+    }
+    
+    .cropper-point.point-sw {
+        bottom: -6px;
+        left: -6px;
+    }
+    
+    .cropper-point.point-se {
+        right: -6px;
+        bottom: -6px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .cropper-point {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .cropper-point.point-nw {
+        top: -7px;
+        left: -7px;
+    }
+    
+    .cropper-point.point-ne {
+        top: -7px;
+        right: -7px;
+    }
+    
+    .cropper-point.point-sw {
+        bottom: -7px;
+        left: -7px;
+    }
+    
+    .cropper-point.point-se {
+        right: -7px;
+        bottom: -7px;
+    }
+}

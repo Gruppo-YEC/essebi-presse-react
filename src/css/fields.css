@@ -1,0 +1,39 @@
+.field__reverseExternalEntity {
+    box-shadow: 0 3px 8px 0 rgb(0 0 0 / 3%);
+    background-color: rgba(140,140,140,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 5px;
+}
+
+.field__reverseExternalEntity label {
+    padding: 4px 8px;
+    color: #777;
+    font-size: 12px;
+}
+
+.field__reverseExternalEntity button {
+    float: right;
+}
+
+/* la deep non ha più l'area grigia: tabella normale in card squadrata,
+   con il thead copiato dallo stile del datagrid */
+.field__deepExternalEntity label {
+    color: #777;
+    font-size: 12px;
+}
+
+.field__deepExternalEntity thead th {
+    background-color: var(--muted);
+    color: var(--muted-foreground);
+    font-size: 11px;
+    font-weight: 500;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--border);
+}
+
+/* l'ultima riga chiude a filo col bordo della card: senza questo il suo
+   border-b si somma al bordo della card e si vede doppio */
+.field__deepExternalEntity tbody tr:last-child td {
+    border-bottom: 0;
+}

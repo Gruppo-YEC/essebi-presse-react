@@ -1,0 +1,54 @@
+#app-container {
+    /* tutta la viewport meno la barra superiore (48px) */
+    min-height: calc(100vh - 48px);
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+
+.dark-theme-active #app-container,
+[data-bs-theme="dark"] #app-container {
+    background-color: var(--background);
+}
+
+.data-grid-container .table-responsive {
+    height: auto;
+    /* era 50vh per non far tagliare i vecchi dropdown non-portal;
+       con i menu Radix (portal su body) non serve più */
+    min-height: 0;
+    overflow-x: auto;
+    position: static;
+}
+
+.datagrid-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 20px !important;
+}
+
+.datagrid-table thead {
+    z-index: 99;
+    position: sticky;
+    top: 0;
+}
+
+.datagrid-table thead th {
+    z-index: 99;
+    background-color: var(--muted);
+    color: var(--muted-foreground);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.datagrid-table thead th.head-last-td {
+    position: sticky;
+    right: 0;
+    border-left: 1px solid rgba(200,200,200,0.2);
+}
+
+.datagrid-table td.last-td {
+    position: sticky;
+    right: 0;
+    border-left: 1px solid rgba(100,100,100,0.2);
+    white-space: nowrap;
+    width: 1%;
+}

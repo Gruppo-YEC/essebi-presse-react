@@ -1,0 +1,64 @@
+.column-filter-toggle {
+    transition: all 0.2s ease;
+    border-radius: 3px;
+}
+
+.column-filter-toggle:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+    color: #0d6efd !important;
+}
+
+.column-filter-toggle.active-filter {
+    background-color: rgba(13, 110, 253, 0.1);
+    border-radius: 3px;
+    animation: activeFilterPulse 2s infinite;
+}
+
+@keyframes activeFilterPulse {
+    0% {
+        background-color: rgba(13, 110, 253, 0.1);
+    }
+    50% {
+        background-color: rgba(13, 110, 253, 0.2);
+    }
+    100% {
+        background-color: rgba(13, 110, 253, 0.1);
+    }
+}
+
+.datagrid-table th {
+    vertical-align: middle;
+    border-bottom: 1px solid var(--border);
+}
+
+.column-filter-header {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* white-space: nowrap; */
+}
+
+.column-filter-badge {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 768px) {
+    .column-filter-header {
+        padding: 4px 8px;
+        font-size: 0.8rem;
+    }
+}
