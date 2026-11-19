@@ -1,0 +1,99 @@
+/* ==========================================================================
+   Colori EsseBi Presse, allineati al sito (essebi-presse-website/src/index.css).
+   Il sito li definisce in oklch; qui gli stessi valori convertiti in hex.
+     Essebi Blue      brand-600  #0070c0  (la "p" del logo)  → primary
+     Essebi Graphite  scala grigia fredda                     → testi, bordi, superfici
+   Si sovrascrivono solo i token del framework (src/css/tailwind.css, da non toccare).
+
+   Scala di riferimento
+     brand     50 #eef6fe · 100 #d9ebfe · 200 #bbdcfe · 300 #91c6fd · 400 #55a5f4 · 500 #2389e2
+               600 #0070c0 · 700 #125ca1 · 800 #144881 · 900 #143560 · 950 #0b1f3b
+     graphite  50 #f9fafb · 100 #f3f4f6 · 200 #e3e5e8 · 300 #d2d4d7 · 400 #9fa1a4 · 500 #646668
+               600 #505355 · 700 #3d4043 · 800 #24272a · 900 #14171b · 950 #090d10
+   ========================================================================== */
+
+:root {
+    --background: #ffffff;
+    --foreground: #090d10;            /* graphite-950 */
+    --card: #ffffff;
+    --card-foreground: #090d10;
+    --popover: #ffffff;
+    --popover-foreground: #090d10;
+
+    --primary: #0070c0;               /* brand-600 */
+    --primary-foreground: #ffffff;
+    --secondary: #646668;             /* graphite-500 */
+    --secondary-foreground: #ffffff;
+    --success: #009956;               /* come --color-success del sito */
+    --success-foreground: #ffffff;
+    --danger: #e7000b;                /* come --destructive del sito */
+    --danger-foreground: #ffffff;
+    --warning: #f2a618;               /* come --color-warning del sito */
+    --warning-foreground: #090d10;
+    --info: #2389e2;                  /* brand-500, come --color-info del sito */
+    --info-foreground: #ffffff;
+    --light: #f3f4f6;                 /* graphite-100 */
+    --light-foreground: #24272a;
+    --dark: #14171b;                  /* graphite-900 */
+    --dark-foreground: #ffffff;
+
+    --muted: #f3f4f6;                 /* graphite-100 */
+    --muted-foreground: #505355;      /* graphite-600: >= 4.5:1 anche su muted */
+    --accent: #eef6fe;                /* brand-50, come --accent del sito */
+    --accent-foreground: #144881;     /* brand-800 */
+
+    --border: #e3e5e8;                /* graphite-200 */
+    --input: #d2d4d7;                 /* graphite-300 */
+    --ring: #2389e2;                  /* brand-500, come --ring del sito */
+
+    /* Sidebar chiara come la navbar del sito; voce attiva nel blu del marchio */
+    --sidebar: #f9fafb;               /* graphite-50 */
+    --sidebar-foreground: #3d4043;    /* graphite-700 */
+    --sidebar-primary: #0070c0;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #e3e5e8;        /* graphite-200 */
+    --sidebar-accent-foreground: #090d10;
+    --sidebar-border: #e3e5e8;
+}
+
+.dark-theme-active,
+[data-bs-theme="dark"] {
+    --background: #090d10;            /* graphite-950, come il .dark del sito */
+    --foreground: #f9fafb;
+    --card: #14171b;                  /* graphite-900 */
+    --card-foreground: #f9fafb;
+    --popover: #14171b;
+    --popover-foreground: #f9fafb;
+
+    --primary: #2389e2;               /* brand-500: il 600 è troppo scuro su fondo scuro */
+    --primary-foreground: #ffffff;
+    --danger: #ff6467;                /* come --destructive del .dark del sito */
+    --light: #24272a;
+    --light-foreground: #d2d4d7;
+    --dark: #d2d4d7;
+    --dark-foreground: #14171b;
+
+    --muted: #24272a;                 /* graphite-800 */
+    --muted-foreground: #9fa1a4;      /* graphite-400 */
+    --accent: #24272a;
+    --accent-foreground: #f9fafb;
+
+    --border: rgb(255 255 255 / 10%);
+    --input: rgb(255 255 255 / 15%);
+    --ring: #55a5f4;                  /* brand-400 */
+
+    --sidebar: #14171b;
+    --sidebar-foreground: #d2d4d7;
+    --sidebar-primary: #2389e2;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #24272a;
+    --sidebar-accent-foreground: #f9fafb;
+    --sidebar-border: rgb(255 255 255 / 10%);
+}
+
+/* Elenco Articoli: la modifica passa dall'Editor articolo (pulsante "Editor" della riga),
+   quindi nel menu ⚙ della riga si nasconde la voce "Modifica" standard.
+   Il menu si apre fuori dalla tabella (portal): si riconosce la pagina dalla tabella degli articoli. */
+body:has(table.datagrid-table[data-entity-name="item_model"]) .datagrid-dropdown-edit {
+    display: none;
+}

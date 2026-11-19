@@ -19,6 +19,84 @@ export const menu = [
         "href": '#',
         "icon": '',
         "entity": '',
+        "label": 'Catalogo'
+    },
+    {
+        "type": 'item',
+        "href": '/entity/item_model',
+        "icon": 'boxes-stacked',
+        "entity": 'item_model',
+        "label": 'Articoli'
+    },
+    // Pagine custom del catalogo: gestione rapida con trascinamento e modali
+    {
+        "type": 'item',
+        "href": '/page/CatalogoArticolo',
+        "icon": 'pen-to-square',
+        "entity": 'item_model',
+        "label": 'Editor articolo'
+    },
+    {
+        "type": 'item',
+        "href": '/page/CatalogoCategorie',
+        "icon": 'folder-tree',
+        "entity": 'item_technical_category',
+        "label": 'Gestione categorie'
+    },
+    {
+        "type": 'item',
+        "href": '/page/CatalogoAttributi',
+        "icon": 'list-check',
+        "entity": 'item_attribute_definition',
+        "label": 'Gestione attributi'
+    },
+    {
+        "type": 'folder',
+        "href": '#',
+        "icon": 'sitemap',
+        "entity": '',
+        "label": 'Classificazione',
+        "items": [
+            {
+                "type": 'item',
+                "href": '/entity/item_goods_category',
+                "entity": 'item_goods_category',
+                "label": 'Categorie merceologiche'
+            },
+            {
+                "type": 'item',
+                "href": '/entity/item_technical_category',
+                "entity": 'item_technical_category',
+                "label": 'Categorie tecniche'
+            },
+            {
+                "type": 'item',
+                "href": '/entity/item_technical_type',
+                "entity": 'item_technical_type',
+                "label": 'Tipologie'
+            },
+        ]
+    },
+    {
+        "type": 'item',
+        "href": '/entity/brand',
+        "icon": 'trademark',
+        "entity": 'brand',
+        "label": 'Marchi'
+    },
+    {
+        "type": 'item',
+        "href": '/entity/item_attribute_definition',
+        "icon": 'sliders',
+        "entity": 'item_attribute_definition',
+        "label": 'Attributi'
+    },
+
+    {
+        "type": 'header',
+        "href": '#',
+        "icon": '',
+        "entity": '',
         "label": 'Utente'
     },
     {

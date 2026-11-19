@@ -1,7 +1,8 @@
-import logo from './logo.svg';
+// "p" del marchio EsseBi in bianco: sta nel riquadro blu (--sidebar-primary) di sidebar e login
+import logo from './logo.png';
 
 export const settings = {
-    "title": "Essebi Presse Admin Console",
+    "title": "EsseBi Presse Admin Console",
     "apiUrl": "https://api.essebipresse.it/api",
     "storageUrl": "https://api.essebipresse.it/",
     "googleMapKey": "inserire_chiave_valida",

@@ -1,0 +1,12 @@
+/* Pagina Categorie del catalogo: tutto sotto .catalogo-categorie */
+.catalogo-categorie .cat-row-actions {
+    opacity: 0;
+    transition: opacity 120ms;
+}
+.catalogo-categorie .cat-row:hover .cat-row-actions,
+.catalogo-categorie .cat-row:focus-within .cat-row-actions {
+    opacity: 1;
+}
+@media (hover: none) {
+    .catalogo-categorie .cat-row-actions { opacity: 1; }
+}
