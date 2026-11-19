@@ -51,6 +51,13 @@ export const menu = [
         "label": 'Gestione attributi'
     },
     {
+        "type": 'item',
+        "href": '/entity/brand',
+        "icon": 'trademark',
+        "entity": 'brand',
+        "label": 'Marchi'
+    },
+    {
         "type": 'folder',
         "href": '#',
         "icon": 'sitemap',
@@ -75,21 +82,14 @@ export const menu = [
                 "entity": 'item_technical_type',
                 "label": 'Tipologie'
             },
+            {
+                "type": 'item',
+                "href": '/entity/item_attribute_definition',
+                "icon": 'sliders',
+                "entity": 'item_attribute_definition',
+                "label": 'Attributi'
+            },
         ]
-    },
-    {
-        "type": 'item',
-        "href": '/entity/brand',
-        "icon": 'trademark',
-        "entity": 'brand',
-        "label": 'Marchi'
-    },
-    {
-        "type": 'item',
-        "href": '/entity/item_attribute_definition',
-        "icon": 'sliders',
-        "entity": 'item_attribute_definition',
-        "label": 'Attributi'
     },
 
     {
