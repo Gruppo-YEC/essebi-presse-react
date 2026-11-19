@@ -55,7 +55,7 @@ export const menu = [
         "href": '#',
         "icon": 'sitemap',
         "entity": '',
-        "label": 'Classificazione',
+        "label": 'Configurazione',
         "items": [
             {
                 "type": 'item',
