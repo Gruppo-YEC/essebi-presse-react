@@ -28,14 +28,8 @@ export const menu = [
         "entity": 'item_model',
         "label": 'Articoli'
     },
-    // Pagine custom del catalogo: gestione rapida con trascinamento e modali
-    {
-        "type": 'item',
-        "href": '/page/CatalogoArticolo',
-        "icon": 'pen-to-square',
-        "entity": 'item_model',
-        "label": 'Editor articolo'
-    },
+    // Pagine custom del catalogo: gestione rapida con trascinamento e modali.
+    // L'Editor articolo non sta nel menu: si apre da Articoli ("Crea nuovo" e "Editor" di riga)
     {
         "type": 'item',
         "href": '/page/CatalogoCategorie',

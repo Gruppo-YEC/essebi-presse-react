@@ -97,3 +97,9 @@
 body:has(table.datagrid-table[data-entity-name="item_model"]) .datagrid-dropdown-edit {
     display: none;
 }
+
+/* Elenco Articoli: "Crea nuovo" standard nascosto, al suo posto quello del hook top
+   (StandardViewTopHook) che apre l'Editor articolo vuoto */
+#btn-create-new-item_model {
+    display: none;
+}
