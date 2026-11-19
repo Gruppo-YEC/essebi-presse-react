@@ -1,0 +1,6 @@
+# Deploy del gestionale su Netlify.
+# Vite scrive in "build" (vite.config.mjs, outDir), non in "dist": questa impostazione
+# prevale su quella dell'interfaccia di Netlify. Le rotte dell'app le gestisce public/_redirects.
+[build]
+  command = "npm run build"
+  publish = "build"
