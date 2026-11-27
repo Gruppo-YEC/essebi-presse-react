@@ -362,8 +362,8 @@ export const entity_language = {
             "deleted": 'Eliminato',
             "idCatalog": 'Catalogo',
             "title": 'Titolo del file',
+            "description": 'Descrizione breve',
             "file": 'File',
-            "coverImage": 'Copertina',
             "sortOrder": 'Ordine',
         },
     }
