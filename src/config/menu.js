@@ -149,6 +149,15 @@ export const menu = [
         "entity": 'posts',
         "label": 'News ed eventi'
     },
+    // Cataloghi per gamma (tabella catalog): testo, loghi e PDF scaricabili. Un record per
+    // gamma: il nome è univoco (uniqueFields.js) (27/11/2026)
+    {
+        "type": 'item',
+        "href": '/entity/catalog',
+        "icon": 'book-open',
+        "entity": 'catalog',
+        "label": 'Cataloghi'
+    },
 
     {
         "type": 'header',

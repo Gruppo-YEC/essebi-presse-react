@@ -17,6 +17,7 @@ export const UNIQUE_FIELDS = {
     item_attribute_definition: { code: 'Codice' },
     posts: { slug: 'Slug' },
     site_meta: { metaKey: 'Chiave' },
+    catalog: { name: 'Nome' },
 };
 
 /**
