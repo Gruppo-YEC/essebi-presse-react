@@ -361,8 +361,11 @@ export const entity_language = {
             "lastUpdate": 'Ultimo aggiornamento',
             "deleted": 'Eliminato',
             "idCatalog": 'Catalogo',
+            "section": 'Gruppo',
             "file": 'File',
-            "title": 'Titolo',
+            "title": 'Titolo del file',
+            "detail": 'Dettaglio',
+            "url": 'Link produttore',
             "sortOrder": 'Ordine',
         },
     }
