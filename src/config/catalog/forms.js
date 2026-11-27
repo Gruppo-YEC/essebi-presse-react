@@ -73,6 +73,7 @@ export const attributeFields = (scopeOptions) => [
     { key: 'code', label: 'Codice', type: 'code', from: 'label', required: true, help: 'Identificativo interno, unico' },
     { key: 'dataType', label: 'Tipo di valore', type: 'select', options: DATA_TYPES, required: true },
     { key: 'unit', label: 'Unità di misura', type: 'text', help: 'Es. t, mm, kW (solo per i numeri)' },
+    { key: 'allowRange', label: 'Ammette un intervallo (da X a Y)', type: 'switch', full: true, help: 'Solo per i numeri, es. la forza di chiusura' },
     { key: 'scope', label: 'Vale per', type: 'select', options: scopeOptions, required: true, full: true },
     { key: 'isFilterable', label: 'Filtro nel catalogo', type: 'switch' },
     { key: 'isShopVisible', label: 'Visibile nella scheda', type: 'switch' },
@@ -94,11 +95,13 @@ export function scopeFields(scope, technicals) {
 }
 
 export const attributeInitial = (r) => ({
-    label: r.label, code: r.code, dataType: optOf(r.dataType), unit: r.unit || '', scope: scopeOf(r),
+    label: r.label, code: r.code, dataType: optOf(r.dataType), unit: r.unit || '', allowRange: boolOf(r.allowRange) ? 1 : 0, scope: scopeOf(r),
     isFilterable: boolOf(r.isFilterable) ? 1 : 0, isShopVisible: boolOf(r.isShopVisible) ? 1 : 0,
 });
 export const attributePayload = (v, technicals) => ({
     label: v.label.trim(), code: v.code.trim(), dataType: opt(v.dataType), unit: (v.unit || '').trim(),
+    // Intervallo (valueNumberMax negli articoli) solo per i numeri
+    allowRange: v.dataType === 'number' && v.allowRange ? 1 : 0,
     ...scopeFields(v.scope, technicals),
     isFilterable: v.isFilterable ? 1 : 0, isShopVisible: v.isShopVisible ? 1 : 0,
 });

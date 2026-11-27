@@ -88,7 +88,11 @@ function AttributeRow({ row, list, onOpen, over, setOver, onReorder, path }) {
                 </span>
                 {path && <span className='block truncate text-xs text-muted-foreground'>{path}</span>}
             </span>
-            <Badge variant='light'>{dataTypeLabel(type)}{type === 'enum' && row._options !== undefined ? ` · ${row._options}` : ''}</Badge>
+            <Badge variant='light'>
+                {dataTypeLabel(type)}
+                {type === 'enum' && row._options !== undefined ? ` · ${row._options}` : ''}
+                {type === 'number' && boolOf(row.allowRange) ? ' · intervallo' : ''}
+            </Badge>
             {boolOf(row.isFilterable) && <Icon name='filter' title='Filtro nel catalogo' className='text-muted-foreground' />}
             {!boolOf(row.isShopVisible) && <Icon name='eye-slash' title='Nascosto nella scheda' className='text-muted-foreground' />}
             <Icon name='pen-to-square' className='text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100' />
@@ -120,7 +124,7 @@ function OptionRow({ row, list, over, setOver, onReorder, onEdit, onDelete }) {
  */
 function AttributeDialog({ attr, initialScope, attributes, options, technicals, scopeOptions, pathOf, onClose, reload, onCreated }) {
     const isNew = !attr;
-    const blank = { label: '', code: '', dataType: 'number', unit: '', scope: initialScope, isFilterable: 1, isShopVisible: 1 };
+    const blank = { label: '', code: '', dataType: 'number', unit: '', allowRange: 0, scope: initialScope, isFilterable: 1, isShopVisible: 1 };
     const [draft, setDraft] = useState(attr ? attributeInitial(attr) : blank);
     const [codeTouched, setCodeTouched] = useState(!isNew);
     const [saving, setSaving] = useState(false);
@@ -199,6 +203,13 @@ function AttributeDialog({ attr, initialScope, attributes, options, technicals, 
                             <Label>Vale per</Label>
                             <Combobox options={scopeOptions} value={draft.scope} onChange={(o) => o && set({ scope: o.value })} />
                         </div>
+                        {/* Numeri: il valore negli articoli può essere anche "da X a Y" (es. forza di chiusura) */}
+                        {draft.dataType === 'number' && (
+                            <div className='sm:col-span-2'>
+                                <SwitchField id='a-range' label='Ammette un intervallo (da X a Y)' checked={!!draft.allowRange} onCheckedChange={(v) => set({ allowRange: v ? 1 : 0 })} />
+                                <p className='mt-1 mb-0 text-xs text-muted-foreground'>Negli articoli si sceglie tra un valore solo e un intervallo; nel filtro del sito un intervallo compare se si sovrappone a quello cercato.</p>
+                            </div>
+                        )}
                         <SwitchField id='a-filter' label='Filtro nel catalogo' checked={!!draft.isFilterable} onCheckedChange={(v) => set({ isFilterable: v ? 1 : 0 })} />
                         <SwitchField id='a-visible' label='Visibile nella scheda' checked={!!draft.isShopVisible} onCheckedChange={(v) => set({ isShopVisible: v ? 1 : 0 })} />
                     </div>
@@ -422,7 +433,7 @@ export default function CatalogoAttributi() {
                                 placeholder={`Nuovo attributo in ${pathOf(newScope).join(' › ')} (Invio)`}
                                 onAdd={async (label) => {
                                     const id = await saveRow('item_attribute_definition', {
-                                        ...attributePayload({ label, code: codify(label), dataType: 'number', unit: '', scope: newScope, isFilterable: 1, isShopVisible: 1 }, technicals),
+                                        ...attributePayload({ label, code: codify(label), dataType: 'number', unit: '', allowRange: 0, scope: newScope, isFilterable: 1, isShopVisible: 1 }, technicals),
                                         sortOrder: nextSort(attributes.filter((a) => scopeOf(a) === newScope)),
                                     });
                                     if (id) { await load(); setEditing({ id }); }

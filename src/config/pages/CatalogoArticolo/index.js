@@ -145,7 +145,14 @@ export default function CatalogoArticolo() {
         (r.attributes || []).forEach((row) => {
             const defId = idOf(row.idAttributeDefinition);
             const def = definitions.find((d) => sameId(d.id, defId));
-            a[defId] = { rowId: row.id, value: attributeValue(row, def ? optOf(def.dataType) : 'text') };
+            const entry = { rowId: row.id, value: attributeValue(row, def ? optOf(def.dataType) : 'text') };
+            // Numero con intervallo: "da" è value, "a" è valueMax (valueNumberMax)
+            if (row.valueNumberMax !== null && row.valueNumberMax !== undefined && row.valueNumberMax !== '') {
+                entry.range = true;
+                entry.hadRange = true;
+                entry.valueMax = String(Number(row.valueNumberMax));
+            }
+            a[defId] = entry;
         });
         const p = (r.photos || [])
             .slice()
@@ -277,10 +284,35 @@ export default function CatalogoArticolo() {
         const type = optOf(def.dataType);
         const value = attrs[def.id]?.value ?? (type === 'boolean' || type === 'enum' ? null : '');
         if (type === 'number') {
-            return (
+            const unit = def.unit && <span className='shrink-0 text-sm text-muted-foreground'>{def.unit}</span>;
+            const range = boolOf(def.allowRange) && !!attrs[def.id]?.range;
+            const single = (
                 <div className='flex items-center gap-2'>
                     <Input type='number' step='any' value={value} onChange={(e) => setAttr(def.id, e.target.value)} />
-                    {def.unit && <span className='shrink-0 text-sm text-muted-foreground'>{def.unit}</span>}
+                    {unit}
+                </div>
+            );
+            if (!boolOf(def.allowRange)) return single;
+            // Attributo che ammette un intervallo (es. forza di chiusura): valore solo oppure da X a Y
+            return (
+                <div className='flex flex-col gap-2'>
+                    <Segmented
+                        options={[{ value: 'single', label: 'Valore' }, { value: 'range', label: 'Intervallo' }]}
+                        value={range ? 'range' : 'single'}
+                        onChange={(v) => setAttrs((prev) => ({ ...prev, [def.id]: { ...(prev[def.id] || { value: '' }), range: v === 'range' } }))}
+                    />
+                    {range ? (
+                        <div className='flex items-center gap-2'>
+                            <span className='shrink-0 text-sm text-muted-foreground'>da</span>
+                            <Input type='number' step='any' value={value} aria-label={`${def.label} da`} onChange={(e) => setAttr(def.id, e.target.value)} />
+                            <span className='shrink-0 text-sm text-muted-foreground'>a</span>
+                            <Input
+                                type='number' step='any' value={attrs[def.id]?.valueMax ?? ''} aria-label={`${def.label} a`}
+                                onChange={(e) => setAttrs((prev) => ({ ...prev, [def.id]: { ...(prev[def.id] || { value: '' }), valueMax: e.target.value } }))}
+                            />
+                            {unit}
+                        </div>
+                    ) : single}
                 </div>
             );
         }
@@ -320,14 +352,33 @@ export default function CatalogoArticolo() {
             toast.error('SKU e slug sono obbligatori');
             return;
         }
+        // Intervalli: servono "da" e "a", con "a" non minore di "da"
+        const badRange = applicable.find((d) => {
+            const a = attrs[d.id];
+            if (optOf(d.dataType) !== 'number' || !boolOf(d.allowRange) || !a?.range) return false;
+            const hasMin = hasValue(a.value);
+            const hasMax = hasValue(a.valueMax);
+            if (!hasMin && !hasMax) return false;
+            return !hasMin || !hasMax || Number(a.valueMax) < Number(a.value);
+        });
+        if (badRange) {
+            toast.error(`${badRange.label}: completa l'intervallo (da… a…) con "a" non minore di "da", oppure scegli "Valore"`);
+            return;
+        }
         const attributes = applicable
             .filter((d) => hasValue(attrs[d.id]?.value))
             .map((d) => {
                 const type = optOf(d.dataType);
                 const a = attrs[d.id];
                 const row = { idAttributeDefinition: ref(d.id) };
-                if (a.rowId) row.id = a.rowId;
-                if (type === 'number') row.valueNumber = Number(a.value);
+                const isRange = type === 'number' && boolOf(d.allowRange) && a.range && hasValue(a.valueMax) && Number(a.valueMax) !== Number(a.value);
+                // Una riga che era un intervallo e torna valore solo si ricrea (senza id): così
+                // valueNumberMax non resta quello vecchio
+                if (a.rowId && (isRange || !a.hadRange)) row.id = a.rowId;
+                if (type === 'number') {
+                    row.valueNumber = Number(a.value);
+                    if (isRange) row.valueNumberMax = Number(a.valueMax);
+                }
                 else if (type === 'boolean') row.valueBoolean = Number(a.value);
                 else if (type === 'enum') row.idAttributeOption = ref(a.value);
                 else row.valueText = String(a.value).trim();
