@@ -31,6 +31,39 @@ function ItemModelCell({ item }) {
 
 
 
+/**
+ * Barra annunci: quale annuncio mostra adesso il sito. Lo chiede alla stessa API del sito
+ * (/public/site_announcement), così la pill segue esattamente le sue regole (abilitato, nelle
+ * date, il più recente con del testo). Una richiesta sola per tutte le righe della pagina,
+ * rifatta dopo qualche secondo (es. dopo aver modificato un annuncio).
+ */
+let shownRequest = null;
+let shownAt = 0;
+function shownAnnouncementId() {
+    if (!shownRequest || Date.now() - shownAt > 3000) {
+        shownAt = Date.now();
+        shownRequest = ApiManager.sendRequest('/public/site_announcement', {})
+            .then((r) => (r && r.success === 1 && r.announcement ? Number(r.announcement.id) : null))
+            .catch(() => undefined);
+    }
+    return shownRequest;
+}
+
+function SiteAnnouncementCell({ item }) {
+    const [shownId, setShownId] = useState(undefined);
+    useEffect(() => {
+        let alive = true;
+        shownAnnouncementId().then((id) => { if (alive) setShownId(id); });
+        return () => { alive = false; };
+    }, [item.id, item.lastUpdate]);
+    if (shownId === undefined || shownId !== Number(item.id)) return <></>;
+    return (
+        <Badge variant='success' pill className='me-2' title='È la barra che il sito mostra adesso'>
+            <Icon name='eye' />Attualmente visibile
+        </Badge>
+    );
+}
+
 export default function DataGridLastTdHook({ item, props, entity = null}) {
 
     useEffect(() => {
@@ -49,6 +82,8 @@ export default function DataGridLastTdHook({ item, props, entity = null}) {
                         );
                         // Elenco articoli: prima foto + apertura dell'editor articolo
                         case 'item_model': return <ItemModelCell item={item} />;
+                        // Barra annunci: pill sulla riga che il sito mostra adesso
+                        case 'site_announcement': return <SiteAnnouncementCell item={item} />;
                         default: return (
                             <></>
                         );

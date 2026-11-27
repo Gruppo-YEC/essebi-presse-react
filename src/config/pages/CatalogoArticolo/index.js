@@ -42,7 +42,7 @@ const YES_NO = [{ value: '1', label: 'Sì' }, { value: '0', label: 'No' }];
 
 const EMPTY = {
     sku: '', slug: '', code: '', description: '', notes: '', idBrand: null, year: '',
-    itemCondition: 'usato', marked: 'forSell', publishStatus: 'draft', isFeatured: 0,
+    itemCondition: 'usato', marked: 'forSell', publishStatus: 'draft', isFeatured: 0, readyToShip: 0,
     idGoodsCategory: null, idTechnicalCategory: null, idTechnicalType: null,
 };
 
@@ -138,7 +138,7 @@ export default function CatalogoArticolo() {
             sku: r.sku || '', slug: r.slug || '', code: r.code || '', description: r.description || '', notes: r.notes || '',
             idBrand: idOf(r.idBrand), year: r.year ? String(r.year) : '',
             itemCondition: optOf(r.itemCondition) || 'usato', marked: optOf(r.marked) || 'forSell', publishStatus: optOf(r.publishStatus) || 'draft',
-            isFeatured: boolOf(r.isFeatured) ? 1 : 0,
+            isFeatured: boolOf(r.isFeatured) ? 1 : 0, readyToShip: boolOf(r.readyToShip) ? 1 : 0,
             idGoodsCategory: idOf(r.idGoodsCategory), idTechnicalCategory: idOf(r.idTechnicalCategory), idTechnicalType: idOf(r.idTechnicalType),
         };
         const a = {};
@@ -336,7 +336,7 @@ export default function CatalogoArticolo() {
         const data = {
             sku: form.sku.trim(), slug: form.slug.trim(), code: form.code.trim(), description: form.description, notes: form.notes,
             idBrand: ref(form.idBrand), year: form.year === '' ? null : Number(form.year),
-            itemCondition: opt(form.itemCondition), marked: opt(form.marked), publishStatus: opt(form.publishStatus), isFeatured: form.isFeatured ? 1 : 0,
+            itemCondition: opt(form.itemCondition), marked: opt(form.marked), publishStatus: opt(form.publishStatus), isFeatured: form.isFeatured ? 1 : 0, readyToShip: form.readyToShip ? 1 : 0,
             idGoodsCategory: ref(form.idGoodsCategory), idTechnicalCategory: ref(form.idTechnicalCategory), idTechnicalType: ref(form.idTechnicalType),
             attributes,
             photos: photos.map((p, i) => ({ ...(p.id ? { id: p.id } : {}), photo: fileRef(p.photo), title: p.title || '', sortOrder: (i + 1) * 10 })),
@@ -552,6 +552,8 @@ export default function CatalogoArticolo() {
                                 <div><Segmented options={MARKED} value={form.marked} onChange={(v) => set('marked', v)} /></div>
                             </div>
                             <SwitchField id='a-featured' label='In evidenza in home' checked={!!form.isFeatured} onCheckedChange={(v) => set('isFeatured', v ? 1 : 0)} />
+                            {/* Etichetta "Pronta consegna" sulle card e nella scheda del sito */}
+                            <SwitchField id='a-ready' label='Pronta consegna' checked={!!form.readyToShip} onCheckedChange={(v) => set('readyToShip', v ? 1 : 0)} />
                             {itemId && form.publishStatus === 'publish' && (
                                 <a className='text-xs text-primary hover:underline' href={`https://www.essebipresse.it/prodotti/${form.slug}`} target='_blank' rel='noreferrer'>
                                     <Icon name='arrow-up-right-from-square' className='me-1' />Apri la scheda sul sito

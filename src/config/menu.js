@@ -91,6 +91,70 @@ export const menu = [
         "href": '#',
         "icon": '',
         "entity": '',
+        "label": 'Contatti'
+    },
+    // Lead dai form del sito (o inseriti a mano) e i log di form ed email (27/11/2026)
+    {
+        "type": 'item',
+        "href": '/entity/leads',
+        "icon": 'address-book',
+        "entity": 'leads',
+        "label": 'Lead'
+    },
+    {
+        "type": 'item',
+        "href": '/entity/form_log',
+        "icon": 'file-lines',
+        "entity": 'form_log',
+        "label": 'Log form'
+    },
+    {
+        "type": 'item',
+        "href": '/entity/email_log',
+        "icon": 'envelope-circle-check',
+        "entity": 'email_log',
+        "label": 'Log email'
+    },
+
+    {
+        "type": 'header',
+        "href": '#',
+        "icon": '',
+        "entity": '',
+        "label": 'Sito'
+    },
+    // Barra annunci in cima al sito (tabella site_announcement): il sito mostra la più recente
+    // attiva ed entro le date
+    {
+        "type": 'item',
+        "href": '/entity/site_announcement',
+        "icon": 'bullhorn',
+        "entity": 'site_announcement',
+        "label": 'Barra annunci'
+    },
+    // Impostazioni del sito (tabella site_meta, chiave → testo): email amministratore e
+    // versione. Pagina custom con controlli e anteprima (27/11/2026)
+    {
+        "type": 'item',
+        "href": '/page/SiteMeta',
+        "icon": 'sliders',
+        "entity": 'site_meta',
+        "label": 'Impostazioni sito'
+    },
+    // News ed eventi del sito: elenco, editor e categorie in una pagina custom (27/11/2026)
+    {
+        "type": 'item',
+        "href": '/page/News',
+        "icon": 'newspaper',
+        "entity": 'posts',
+        "label": 'News ed eventi'
+    },
+
+    {
+        "type": 'header',
+        "href": '#',
+        "icon": '',
+        "entity": '',
         "label": 'Utente'
     },
     {

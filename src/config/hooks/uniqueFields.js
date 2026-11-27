@@ -1,7 +1,7 @@
 import { DataManager } from '../../core/data-manager';
 
 /*
- * Campi univoci del catalogo. Nel database non c'è un vincolo UNIQUE (tables.json di
+ * Campi univoci del catalogo, delle news e delle impostazioni del sito (una riga per chiave). Nel database non c'è un vincolo UNIQUE (tables.json di
  * essebi-presse-ckd): l'unicità la controllano preInsert e preUpdate prima di salvare.
  * Il confronto lo fa MySQL (collation utf8mb4_unicode_ci): maiuscole e minuscole contano
  * come lo stesso valore. I record cancellati (deleted = 1) non contano.
@@ -15,6 +15,8 @@ export const UNIQUE_FIELDS = {
     brand: { slug: 'Slug' },
     item_model: { sku: 'SKU', slug: 'Slug' },
     item_attribute_definition: { code: 'Codice' },
+    posts: { slug: 'Slug' },
+    site_meta: { metaKey: 'Chiave' },
 };
 
 /**
